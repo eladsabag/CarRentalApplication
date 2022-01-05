@@ -21,7 +21,12 @@ namespace CarRentalApp
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
-
+            if(!Utils.FormIsOpen("AddUser"))
+            {
+                var addUser = new AddUsers(this);
+                addUser.MdiParent = this.MdiParent;
+                addUser.Show();
+            } 
         }
 
         private void btnResetPassword_Click(object sender, EventArgs e)
@@ -32,13 +37,13 @@ namespace CarRentalApp
                 var id = (int)gvUsersList.SelectedRows[0].Cells["id"].Value;
                 //query databsae for record
                 var user = _db.Users.FirstOrDefault(q => q.id == id);
-                var genericPassword = "Password@123";
-                var hashedPassword = Utils.HashPassword(genericPassword);  
+                var hashedPassword = Utils.DefaultHashPassword();  
 
                 user.password = hashedPassword; 
                 _db.SaveChanges();
 
                 MessageBox.Show($"{user.username}'s Password has been reset!");
+                PopulateGrid();
             }
             catch (Exception ex)
             {
@@ -58,11 +63,41 @@ namespace CarRentalApp
                 _db.SaveChanges();
 
                 MessageBox.Show($"{user.username}'s active status has changed!");
+                PopulateGrid();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        public void PopulateGrid()
+        {
+            var users = _db.Users
+                .Select(q => new
+                {
+                    q.id,
+                    q.username,
+                    q.UserRoles.FirstOrDefault().Role.name,
+                    q.isActive
+                })
+                .ToList();
+            gvUsersList.DataSource = users;
+            gvUsersList.Columns["username"].HeaderText = "Username";
+            gvUsersList.Columns["name"].HeaderText = "Role Name";
+            gvUsersList.Columns["isActive"].HeaderText = "Active";
+
+            gvUsersList.Columns["id"].Visible = false;
+        }
+
+        private void ManageUsers_Load(object sender, EventArgs e)
+        {
+            PopulateGrid(); 
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            PopulateGrid();
         }
     }
 }

@@ -49,7 +49,7 @@ namespace CarRentalApp
 
         private void viewArchiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!Utils.FormIsOpen("ManageRentalRecords");
+            if (!Utils.FormIsOpen("ManageRentalRecords"))
             {
                 var manageRentalRecords = new ManageRentalRecords();
                 manageRentalRecords.MdiParent = this;    
@@ -75,6 +75,14 @@ namespace CarRentalApp
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
+            if(_user.password == Utils.DefaultHashPassword())
+            {
+                var resetPassword = new ResetPassword(_user);
+                resetPassword.ShowDialog();
+            }
+
+            var username = _user.username;
+            tsiLoginText.Text = $"Logged in As: {username}";
             if(_roleName != "admin")
             {
                 manageUsersToolStripMenuItem.Visible = false;

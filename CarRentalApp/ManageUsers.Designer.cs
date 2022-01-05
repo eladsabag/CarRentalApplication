@@ -39,12 +39,13 @@
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(-3, 35);
+            this.btnRefresh.Location = new System.Drawing.Point(12, 35);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(139, 57);
             this.btnRefresh.TabIndex = 11;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // btnResetPassword
             // 
@@ -58,7 +59,7 @@
             // 
             // btnAddUser
             // 
-            this.btnAddUser.Location = new System.Drawing.Point(-3, 409);
+            this.btnAddUser.Location = new System.Drawing.Point(12, 405);
             this.btnAddUser.Name = "btnAddUser";
             this.btnAddUser.Size = new System.Drawing.Size(139, 53);
             this.btnAddUser.TabIndex = 9;
@@ -80,18 +81,18 @@
             // gvUsersList
             // 
             this.gvUsersList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvUsersList.Location = new System.Drawing.Point(-3, 98);
+            this.gvUsersList.Location = new System.Drawing.Point(12, 98);
             this.gvUsersList.Name = "gvUsersList";
             this.gvUsersList.RowHeadersWidth = 51;
             this.gvUsersList.RowTemplate.Height = 24;
-            this.gvUsersList.Size = new System.Drawing.Size(807, 273);
+            this.gvUsersList.Size = new System.Drawing.Size(760, 273);
             this.gvUsersList.TabIndex = 7;
             // 
             // btnDeactivateUser
             // 
-            this.btnDeactivateUser.Location = new System.Drawing.Point(623, 405);
+            this.btnDeactivateUser.Location = new System.Drawing.Point(598, 405);
             this.btnDeactivateUser.Name = "btnDeactivateUser";
-            this.btnDeactivateUser.Size = new System.Drawing.Size(139, 57);
+            this.btnDeactivateUser.Size = new System.Drawing.Size(174, 57);
             this.btnDeactivateUser.TabIndex = 12;
             this.btnDeactivateUser.Text = "Deactivate/Activate User";
             this.btnDeactivateUser.UseVisualStyleBackColor = true;
@@ -110,6 +111,7 @@
             this.Controls.Add(this.gvUsersList);
             this.Name = "ManageUsers";
             this.Text = "Manage Users";
+            this.Load += new System.EventHandler(this.ManageUsers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvUsersList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -204,7 +204,7 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "AddEditVechile";
-            this.Text = "AddEditVechile";
+            this.Text = "Add Edit Vechile";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
